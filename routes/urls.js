@@ -21,6 +21,14 @@ router.post('/acorta', (req, res) => {
     // 2. Generar código único (o personalizado)
     // 3. Guardar en la "base de datos" (archivo JSON)
     // 4. Retornar respuesta con datos del nuevo registro
+    const { user, url } = req.body
+
+    if(!user || !url) {
+        console.log('Faltan datos');
+        return res.status(404).json({message: 'Faltan datos necesarios'})
+    }
+    const readData = readDatabase()
+
 });
 
 // GET /validar/:tulink - Validar si un link personalizado está disponible
@@ -29,6 +37,7 @@ router.get('/validar/:tulink', (req, res) => {
     // 1. Verificar que el código tenga entre 6 y 10 caracteres
     // 2. Buscar si el código ya existe en la base de datos
     // 3. Retornar respuesta indicando si está disponible o no
+    const {link} = req.params
 });
 
 // GET /:codigo - Redireccionar a la URL original
